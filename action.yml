@@ -5,6 +5,14 @@ inputs:
     description: "Path to use"
     default: ""
     type: string
+  repository:
+    description: "Repo to use"
+    default: ""
+    type: string
+  ref:
+    description: "Ref to use"
+    default: ""
+    type: string
 
 # Note:
 # - inputs.* should be manually mapped to INPUT_* due to https://github.com/actions/runner/issues/665
@@ -15,6 +23,8 @@ runs:
     - name: Linux run
       env:
         PATH_TO_USE: ${{ inputs.path }}
+        REPOSITORY: ${{ inputs.repository }}
+        REF: ${{ inputs.ref }}
       run: |
         set -eu
         if ! command -v bash >/dev/null; then
