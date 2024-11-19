@@ -11,10 +11,11 @@ inputs:
 # - Use GITHUB_*/RUNNER_* instead of github.*/runner.* due to https://github.com/actions/runner/issues/2185
 runs:
   using: composite
-  env:
-    PATH_TO_USE: ${{ inputs.path }}
   steps:
-    - run: |
+    - name: Linux run
+      env:
+        PATH_TO_USE: ${{ inputs.path }}
+      run: |
         set -eu
         if ! command -v bash >/dev/null; then
           if grep -Eq '^ID=alpine' /etc/os-release; then
