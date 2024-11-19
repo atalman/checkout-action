@@ -161,6 +161,8 @@ if ! type -P git >/dev/null; then
 fi
 
 g git version
+mkdir -p ${PATH_TO_USE}
+pushd ${PATH_TO_USE}
 
 case "${host_os}" in
     # error: could not lock config file C:/tools/cygwin/home/runneradmin/.gitconfig: No such file or directory
