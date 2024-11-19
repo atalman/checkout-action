@@ -172,11 +172,14 @@ esac
 
 g git init
 
-g git remote add origin "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+g git remote add origin "${GITHUB_SERVER_URL}/${REPOSITORY}"
 
 g git config --local gc.auto 0
 
-if [[ "${GITHUB_REF}" == "refs/heads/"* ]]; then
+if [[ "${REF}" != "" ]]; then
+    g retry git fetch --no-tags --prune --no-recurse-submodules --depth=1 origin "+${REF}"
+    g retry git checkout --force "${REF}"
+elif [[ "${GITHUB_REF}" == "refs/heads/"* ]]; then
     branch="${GITHUB_REF#refs/heads/}"
     remote_ref="refs/remotes/origin/${branch}"
     g retry git fetch --no-tags --prune --no-recurse-submodules --depth=1 origin "+${GITHUB_SHA}:${remote_ref}"
