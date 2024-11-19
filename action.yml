@@ -1,11 +1,18 @@
 name: checkout-action
 description: GitHub Action for checking out a repository. (Simplified actions/checkout alternative that does not depend on Node.js.)
+inputs:
+  path:
+    description: "Path to use"
+    default: ""
+    type: string
 
 # Note:
 # - inputs.* should be manually mapped to INPUT_* due to https://github.com/actions/runner/issues/665
 # - Use GITHUB_*/RUNNER_* instead of github.*/runner.* due to https://github.com/actions/runner/issues/2185
 runs:
   using: composite
+  env:
+    PATH_TO_USE: ${{ inputs.path }}
   steps:
     - run: |
         set -eu
