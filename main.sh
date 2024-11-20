@@ -176,7 +176,7 @@ g git remote add origin "${GITHUB_SERVER_URL}/${REPOSITORY}"
 
 g git config --local gc.auto 0
 
-if [[ "${REF}" == "refs/heads/"* ]]; then
+if [[ "${REF}" == "refs/"* ]]; then
     g retry git fetch --no-tags --prune --no-recurse-submodules --depth=1 origin "+${GITHUB_SHA}:${REF}"
     g retry git checkout --force "${REF}"
 elif [[ "${REF}" != "" ]]; then
