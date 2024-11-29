@@ -13,6 +13,11 @@ inputs:
     description: "Ref to use"
     default: ""
     type: string
+  submodules:
+    description: Works as stated in actions/checkout, but the default value is recursive
+    required: false
+    type: string
+    default: recursive
 
 # Note:
 # - inputs.* should be manually mapped to INPUT_* due to https://github.com/actions/runner/issues/665
@@ -25,6 +30,7 @@ runs:
         PATH_TO_USE: ${{ inputs.path }}
         REPOSITORY: ${{ inputs.repository }}
         REF: ${{ inputs.ref }}
+        SUBMODULES: ${{ inputs.submodules }}
       run: |
         set -eu
         if ! command -v bash >/dev/null; then
