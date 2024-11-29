@@ -194,6 +194,13 @@ else
     g retry git checkout --force "${GITHUB_REF}"
 fi
 
+# Init submodules
+if [[ "${SUBMODULES}" == "true" ]]; then
+    g retry git submodule update --init --force --depth=1
+elif [[ "${SUBMODULES}" == "recursive" ]]; then
+    g retry git submodule update --init --force --depth=1 --recursive
+fi
+
 case "${host_os}" in
     # error: could not lock config file C:/tools/cygwin/home/runneradmin/.gitconfig: No such file or directory
     windows) g git config --global --add safe.directory "${wd}" || : ;;
